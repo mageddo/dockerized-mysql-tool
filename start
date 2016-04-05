@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "base directory is "
+echo "$PWD"
+docker rm -f my-mysql &> /dev/null
+docker run --name my-mysql \
+	--hostname mysql.dev \
+	 -v /data/mysql:/var/lib/mysql \
+	-v $PWD/conf:/etc/mysql/conf.d \
+	-e MYSQL_USER=elvis \
+	-e MYSQL_PASSWORD=elvis \
+	-e MYSQL_ROOT_PASSWORD=root -d mysql
+
